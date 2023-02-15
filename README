@@ -1,0 +1,8 @@
+This is the techshell program. For debug mode define DEBUG as 1
+
+TODO
+
+fork commands
+I/O redirection
+
+to build run makefile.sh with bash makefile.sh
