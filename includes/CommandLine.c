@@ -1,9 +1,11 @@
+#include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
 #include "IORedirect.h"
+#include "cons.h"
 
 /* change the value to 1 for debug mode */
 #define DEBUG 0
@@ -13,29 +15,39 @@
 #define BASE_AMOUNT_OF_INPUT_STORAGE 10
 
 
-/* contains */ 
-/* 	a index for enumerating through the heap */
-/* 	a char[] for storing each index of input */
-typedef struct inputArray {
-	int index;
-	char string[];
-
-}inputArray;
-
-
 void CommadLine () {
 	/* variables used in the program */
 	char userInput[256];
+	char pathArray[50];
+	char cwdArray[50];
 	char *exitCase = "exit";
 	int numTokens = 0;
 	
 	/* the main loop of the program that runs until users stops */
 	while (1) {
 		
-		/* variable that will hold the current directory*/
-		char* cwd = getcwd(userInput, 50);
+		/* gets the absolute path of the cwd*/
+		getcwd(pathArray, 50);
 
-		printf("%s$", cwd);
+
+		/* used to get the cwd alone from the path */
+		size_t n = sizeof(pathArray) / sizeof(pathArray[0]);
+		int j = 49;
+		for (int index = n-1; index > 0; index--) {
+			if (pathArray[index] == '/') { 
+				break;	
+			}
+
+			cwdArray[j] = pathArray[index];
+			j -= 1;
+
+		}
+
+		for (int i = 0; i < strlen(cwdArray); i++) {
+			printf("%c", cwdArray[i]);
+		}
+
+		printf("$");
 
 		/* gather the user input for parsing */ 
 		fgets(userInput, 50, stdin);
@@ -49,12 +61,6 @@ void CommadLine () {
 
 		/* take in the user input from the command line
 		 * builds array of strings for later uses*/
-
-		int i = 0;
-		while (i < 256) {
-
-			i += 1;
-		}
 
 		char *parsedInput = malloc(sizeof(inputArray) * BASE_AMOUNT_OF_INPUT_STORAGE);
 		char* token = strtok(userInput, " ");
@@ -83,10 +89,10 @@ void CommadLine () {
 			exit(1);
 		}
 
-		// process the tokens and then look for I/O redirects
-		for (int *parsedIterator = 0; parsedIterator < numTokens - 1; parsedIterator++) {
+		/* process the tokens and then look for I/O redirects */
+		for (int *parsedIterator = 0; *parsedIterator < numTokens - 1; parsedIterator++) {
 			if (parsedInput[*parsedIterator] == '>' || parsedInput[*parsedIterator] == '<') {
-				FILE* file = IORedirect(parsedInput[i]);
+				FILE* file = IORedirect(parsedInput[*parsedIterator]);
 
 				/* do stuff */
 
@@ -95,6 +101,10 @@ void CommadLine () {
 				break;
 			}
 		}
+	
+		/* parsedInput should always have a command in the first spot */
+		/* followed by parameters */
+		
 	}
 
 
