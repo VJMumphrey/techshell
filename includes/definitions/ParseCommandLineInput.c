@@ -10,23 +10,28 @@ struct CommandInput ParseCommandLineInput(char userInput[]) {
 	int numTokens = 0;
 	struct CommandInput command;
 
-	char *parsedInput = malloc(sizeof(struct inputArray) * BASE_AMOUNT_OF_INPUT_STORAGE);
+	char** parsedInput = (char**)malloc(sizeof(inputString));
 	char* token = strtok(userInput, " ");
 
+	/* loops through the tokens and adds them to the parsedInput */
 	while (token != NULL) {
 		token = strtok(NULL, " ");
 
-		if (parsedInput) {
-			parsedInput[numTokens] = *token;
+		if (parsedInput && numTokens == 0) {
+			command.command = token;
+			if (DEBUG == 1) {
+				printf("%s", token);
+			}
+
 			
 		}else {
-			printf("Error in allocating the parsedInput to the heap %s", strerror(errno) );
+			printf("Error in allocating parsedInput %s", strerror(errno));
 			exit(1);
 		}
 
-		/* TODO setup error handling to stop overindexing */
+		/* reallocate memory if the amount that is already present is full */
 		if (numTokens == BASE_AMOUNT_OF_INPUT_STORAGE) {
-			/* setup realloc(void *, unsigned long); to add more memory to the block on the heap */
+			char* parsedInput = (char*)realloc(parsedInput, BASE_AMOUNT_OF_INPUT_STORAGE*2); 
 
 		}
 		numTokens += 1;
@@ -38,20 +43,23 @@ struct CommandInput ParseCommandLineInput(char userInput[]) {
 	}
 
 	/* process the tokens and then look for I/O redirects */
-	for (int *parsedIterator = 0; *parsedIterator < numTokens - 1; parsedIterator++) {
-		if (parsedInput[*parsedIterator] == '>' || parsedInput[*parsedIterator] == '<') {
-			FILE* file = IORedirect(parsedInput[*parsedIterator]);
+	/* for (char *parsedIterator = 0; *parsedIterator < numTokens - 1; parsedIterator++) { */
+	/* 	if (parsedInput[*parsedIterator] == '>' || parsedInput[*parsedIterator] == '<') { */
+	/* 		FILE* file = IORedirect(parsedInput[*parsedIterator]); */
 
-			/* do stuff */
+	/* 		/1* do stuff *1/ */
 
-			fclose(file);
+	/* 		fclose(file); */
 
-			break;
-		}
-	}
+	/* 		break; */
+	/* 	} */
+	/* } */
 
 	/* parsedInput should always have a command in the first spot */
 	/* followed by parameters */
-	
+
+
+	free(parsedInput);
+
 	return command;
 }
