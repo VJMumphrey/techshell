@@ -2,8 +2,8 @@
 #include <string.h>
 #include <errno.h>
 #include <stdio.h>
-#include "../headers/IORedirect.h"
-#include "../headers/cons.h"
+#include "../includes/IORedirect.h"
+#include "../lib/cons.h"
 
 
 struct CommandInput ParseCommandLineInput(char userInput[]) {
@@ -15,14 +15,17 @@ struct CommandInput ParseCommandLineInput(char userInput[]) {
 
 	/* loops through the tokens and adds them to the parsedInput */
 	while (token != NULL) {
-		token = strtok(NULL, " ");
 
-		if (parsedInput && numTokens == 0) {
-			command.command = token;
-			if (DEBUG == 1) {
-				printf("%s", token);
+		if (parsedInput) {
+			if (numTokens == 0) {
+				command.command = token;
+			}else {
+				parsedInput[numTokens] = token;
 			}
 
+			if (DEBUG == 1) {
+				printf("%s ", token);
+			}
 			
 		}else {
 			printf("Error in allocating parsedInput %s", strerror(errno));
@@ -31,15 +34,16 @@ struct CommandInput ParseCommandLineInput(char userInput[]) {
 
 		/* reallocate memory if the amount that is already present is full */
 		if (numTokens == BASE_AMOUNT_OF_INPUT_STORAGE) {
-			char* parsedInput = (char*)realloc(parsedInput, BASE_AMOUNT_OF_INPUT_STORAGE*2); 
-
+			char** parsedInput = (char**)realloc(parsedInput, BASE_AMOUNT_OF_INPUT_STORAGE*2); 
 		}
-		numTokens += 1;
-	}
 
-	if (DEBUG == 1 && token == NULL) {
-		printf("Error with parsing the tokens %s", strerror(errno));
-		exit(1);
+		token = strtok(NULL, " ");
+		numTokens += 1;
+
+		/* if (DEBUG == 1 && token == NULL) { */
+		/* 	printf("Error with parsing the tokens %s", strerror(errno)); */
+		/* 	exit(1); */
+		/* } */
 	}
 
 	/* process the tokens and then look for I/O redirects */
@@ -58,6 +62,8 @@ struct CommandInput ParseCommandLineInput(char userInput[]) {
 	/* parsedInput should always have a command in the first spot */
 	/* followed by parameters */
 
+	/* copy the parsed input into the command args */
+	/* command.args = parsedInput; */
 
 	free(parsedInput);
 

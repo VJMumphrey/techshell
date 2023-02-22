@@ -4,12 +4,12 @@
 #include <string.h>
 #include <errno.h>
 #include <limits.h>
-#include "../headers/cons.h"
-#include "../headers/ParseCommandLineInput.h"
-#include "../headers/ExecuteCommand.h"
+#include "../lib/cons.h"
+#include "../includes/ParseCommandLineInput.h"
+#include "../includes/ExecuteCommand.h"
 
 
-void CommadLine () {
+int main (void) {
 	/* variables used in the program */
 	char userInput[256];
 	char cwdArray[50];
@@ -41,5 +41,8 @@ void CommadLine () {
 
 
 		ExecuteCommand(command);
+
 	}
+	
+	return 0;
 }

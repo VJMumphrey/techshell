@@ -1,4 +1,4 @@
-#include "../headers/cons.h"
+#include "../lib/cons.h"
 
 void ExecuteCommand(struct CommandInput command) {
 

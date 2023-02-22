@@ -1,10 +1,10 @@
-This is the techshell program. For debug mode define DEBUG as 1
+This is the techshell program. For debug mode change DEBUG to 1 in lib/cons.h
 
 TODO
 
-getting cwd
-parse input
 I/O redirection
 execute the command
 
-to build run makefile.sh with bash makefile.sh
+to build run make in /src
+
+To clean up run make clean
