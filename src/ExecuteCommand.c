@@ -1,16 +1,33 @@
-#include <stdio.h>
 #include "../lib/cons.h"
-#include "../includes/IORedirect.h"
+#include <unistd.h>
+#include "../src/ParsecommandLineInput.c"
 
 void ExecuteCommand(struct CommandInput command) {
-	/* process the tokens and then look for I/O redirects */
+ int status_code = execvp()
+ 
+ if (status_code == -1){
+  printf("Process did not terminate correctly\n")
+  exit(1);
+ }
+ 
+  
+  
+  
+  
+  /* process the tokens and then look for I/O redirects */
+	/* for (char *parsedIterator = 0; *parsedIterator < numTokens - 1; parsedIterator++) { */
+	/* 	if (parsedInput[*parsedIterator] == '>' || parsedInput[*parsedIterator] == '<') { */
+	/* 		FILE* file = IORedirect(parsedInput[*parsedIterator]); */
 
-	if (command.op) { 
-		FILE* file = IORedirect(command.op);
+	/* 		/1* do stuff *1/ */
 
-		/* do stuff */
+	/* 		fclose(file); */
 
-		fclose(file);
-	}
+	/* 		break; */
+	/* 	} */
+	/* } */
+
+	/* parsedInput should always have a command in the first spot */
+	/* followed by parameters */
 
 }
