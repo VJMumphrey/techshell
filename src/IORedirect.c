@@ -3,22 +3,19 @@
 
 FILE* IORedirect(char operator) {
 	
+	/* opens files and creates/returns handles so they can be used elsewhere */
+
 	FILE* file;
 	
-	// figure out how this works to correctly implement
 	if (operator == '>') {
-		FILE* outfile = fopen("outfile", "w");
-		dup2(fileno(outfile), 0);
-
-		/* some code here */
-
+		FILE* outfile = fopen("outfile", "w+");
+		/* dup2(fileno(outfile), 0); */
+	
 		file = outfile;
 
 	}else if (operator == '<') {
 		FILE* infile = fopen("inputFile", "r");
-		dup2(fileno(infile), 0);
-
-		/* some code here */
+		/* dup2(fileno(infile), 0); */
 
 		file = infile;
 	}

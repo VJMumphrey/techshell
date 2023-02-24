@@ -1,4 +1,5 @@
 #ifndef LIB
+#define LIB
 /* All predefined values should be in here */
 
 
@@ -23,8 +24,8 @@ typedef char inputString[BASE_AMOUNT_OF_INPUT_STORAGE][30];
 struct CommandInput {
 	char* command;
 	char** args;
+	char op;
 
 };
-
 
 #endif

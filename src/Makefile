@@ -9,10 +9,10 @@ shell: main.o ParseCommandLineInput.o ExecuteCommand.o IORedirect.o
 main.o: main.c ../lib/cons.h ../includes/ParseCommandLineInput.h ../includes/ExecuteCommand.h
 	$(CC) $(CFLAGS) -o ../obj/main.o -c main.c
 
-ExecuteCommand.o: ExecuteCommand.c ../lib/cons.h
+ExecuteCommand.o: ExecuteCommand.c ../lib/cons.h ../includes/IORedirect.h
 	$(CC) $(CFLAGS) -o ../obj/ExecuteCommand.o -c ExecuteCommand.c
 
-ParseCommandLineInput.o: ParseCommandLineInput.c ../includes/IORedirect.h ../lib/cons.h
+ParseCommandLineInput.o: ParseCommandLineInput.c ../lib/cons.h
 	$(CC) $(CFLAGS) -o ../obj/ParseCommandLineInput.o -c ParseCommandLineInput.c
 
 IORedirect.o: IORedirect.c 

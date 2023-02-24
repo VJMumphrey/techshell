@@ -2,7 +2,6 @@
 #include <string.h>
 #include <errno.h>
 #include <stdio.h>
-#include "../includes/IORedirect.h"
 #include "../lib/cons.h"
 
 
@@ -45,26 +44,11 @@ struct CommandInput ParseCommandLineInput(char userInput[], char** parsedInput) 
 		/* } */
 	}
 
-	/* process the tokens and then look for I/O redirects */
-	/* for (char *parsedIterator = 0; *parsedIterator < numTokens - 1; parsedIterator++) { */
-	/* 	if (parsedInput[*parsedIterator] == '>' || parsedInput[*parsedIterator] == '<') { */
-	/* 		FILE* file = IORedirect(parsedInput[*parsedIterator]); */
-
-	/* 		/1* do stuff *1/ */
-
-	/* 		fclose(file); */
-
-	/* 		break; */
-	/* 	} */
-	/* } */
-
 	/* parsedInput should always have a command in the first spot */
 	/* followed by parameters */
 
 	/* give the command args the pointer to the parsed input */
 	command.args = parsedInput;
-
-
 
 	return command;
 }
