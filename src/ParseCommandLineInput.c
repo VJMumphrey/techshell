@@ -6,11 +6,10 @@
 #include "../lib/cons.h"
 
 
-struct CommandInput ParseCommandLineInput(char userInput[]) {
+struct CommandInput ParseCommandLineInput(char userInput[], char** parsedInput) {
 	int numTokens = 0;
 	struct CommandInput command;
 
-	char** parsedInput = (char**)malloc(sizeof(inputString));
 	char* token = strtok(userInput, " ");
 
 	/* loops through the tokens and adds them to the parsedInput */
@@ -62,10 +61,10 @@ struct CommandInput ParseCommandLineInput(char userInput[]) {
 	/* parsedInput should always have a command in the first spot */
 	/* followed by parameters */
 
-	/* copy the parsed input into the command args */
-	/* command.args = parsedInput; */
+	/* give the command args the pointer to the parsed input */
+	command.args = parsedInput;
 
-	free(parsedInput);
+
 
 	return command;
 }

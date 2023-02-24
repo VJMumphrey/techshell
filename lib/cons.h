@@ -22,7 +22,7 @@ typedef char inputString[BASE_AMOUNT_OF_INPUT_STORAGE][30];
 /*	- the args stored in a array */
 struct CommandInput {
 	char* command;
-	char args[BASE_AMOUNT_OF_INPUT_STORAGE][30];
+	char** args;
 
 };
 

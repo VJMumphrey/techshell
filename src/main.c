@@ -36,11 +36,13 @@ int main (void) {
 			exit(0);
 		}
 
+		char** parsedInput = (char**)malloc(sizeof(inputString));
 		/* parse the commandline input */
-		struct CommandInput command = ParseCommandLineInput(userInput);
-
+		struct CommandInput command = ParseCommandLineInput(userInput, parsedInput);
 
 		ExecuteCommand(command);
+
+		free(parsedInput);
 
 	}
 	
