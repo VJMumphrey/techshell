@@ -5,7 +5,7 @@
 #include "../lib/cons.h"
 
 
-struct CommandInput ParseCommandLineInput(char userInput[], char** parsedInput) {
+struct CommandInput ParseCommandLineInput(char userInput[], char** args, int heapSize) {
 	int numTokens = 0;
 	struct CommandInput command;
 
@@ -14,12 +14,17 @@ struct CommandInput ParseCommandLineInput(char userInput[], char** parsedInput) 
 	/* loops through the tokens and adds them to the parsedInput */
 	while (token != NULL) {
 
-		if (parsedInput) {
+		if (args) {
 			if (numTokens == 0) {
 				command.command = token;
 			}else {
-				parsedInput[numTokens] = token;
+				if (*token == '>' || *token == '<') {
+					command.op = *token;	
+					goto skip;
+				}
+				strcpy(args[numTokens], token);
 			}
+		skip:
 
 			if (DEBUG == 1) {
 				printf("%s ", token);
@@ -33,22 +38,20 @@ struct CommandInput ParseCommandLineInput(char userInput[], char** parsedInput) 
 		/* reallocate memory if the amount that is already present is full */
 		if (numTokens == BASE_AMOUNT_OF_INPUT_STORAGE) {
 			char** parsedInput = (char**)realloc(parsedInput, BASE_AMOUNT_OF_INPUT_STORAGE*2); 
+			heapSize += BASE_AMOUNT_OF_INPUT_STORAGE;
 		}
 
 		token = strtok(NULL, " ");
 		numTokens += 1;
 
-		/* if (DEBUG == 1 && token == NULL) { */
-		/* 	printf("Error with parsing the tokens %s", strerror(errno)); */
-		/* 	exit(1); */
-		/* } */
 	}
 
 	/* parsedInput should always have a command in the first spot */
 	/* followed by parameters */
+	/* followed by a redirection op if necessary */
 
 	/* give the command args the pointer to the parsed input */
-	command.args = parsedInput;
+	command.args = args;
 
 	return command;
 }

@@ -36,11 +36,26 @@ int main (void) {
 			exit(0);
 		}
 
-		char** parsedInput = (char**)malloc(sizeof(inputString));
-		/* parse the commandline input */
-		struct CommandInput command = ParseCommandLineInput(userInput, parsedInput);
+		/* used to keep track of reallocations */
+		int heapSize = BASE_AMOUNT_OF_INPUT_STORAGE;
 
+		/* build an array of strings on the heap */
+		char** parsedInput = (char**)malloc(BASE_AMOUNT_OF_INPUT_STORAGE * sizeof(char*));
+
+		for (int i = 0; i < BASE_AMOUNT_OF_INPUT_STORAGE; i++) {
+			parsedInput[i] = malloc(100 * sizeof(char)); 
+		}
+
+		/* parse the commandline input */
+		struct CommandInput command = ParseCommandLineInput(userInput, parsedInput, heapSize);
+
+		/* execute the command with the given the args */
 		ExecuteCommand(command);
+
+		/* free all of the memory */
+		for (int i = 0; i < heapSize; i++) {
+			free(parsedInput[i]);
+		}
 
 		free(parsedInput);
 
