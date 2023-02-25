@@ -1,10 +1,8 @@
-This is the techshell program. For debug mode change DEBUG to 1 in lib/cons.h
+TechShell Program
 
-TODO
+By: Vito Mumphrey and Stone Gorman
 
-I/O redirection
-execute the command
-
-to build run make in /src
-
-To clean up run make clean
+ExecuteCommand.c uses the command execvp to run the commands which also checks to make sure execvp ran correctly
+ParseCommandLineInput.c makes tokens as well as puts them into an array to be used by ExecuteCommand
+IORedirect.c uses the given code to redirect the stdin/stdout to/from the appropriate location 
+main.c is a driver for subroutines
