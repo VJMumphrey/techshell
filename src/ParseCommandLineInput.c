@@ -27,12 +27,15 @@ struct CommandInput ParseCommandLineInput(char userInput[], char** args, int* he
 			/* set values for redirection */
 			if (*token == '>' || *token == '<') {
 				command.op = *token;	
+				token = strtok(NULL, " ");
+				if (token != NULL) {
+					int pos = strcspn(token, "\n");
+					token[pos] = '\0';
+				}
+				command.outfile = token;
+				numTokens--;
 				goto skip;
 			}
-
-			/* if (command.op == args[numTokens-1][0]) { */
-			/* 	command.outfile = token; */	
-			/* } */
 
 			/* set the args values */
 			strcpy(args[numTokens], token);
