@@ -26,7 +26,7 @@ void ExecuteCommand(struct CommandInput command, int* heapSize) {
 	}
 
 	/* run the command in a seperate process */
-	int status_code = execvpe("bin/ls", command.args, envp);
+	int status_code = execvpe(command.args[0], command.args, envp);
  
 	if (status_code == -1){
 		printf("Process did not terminate correctly\n");
