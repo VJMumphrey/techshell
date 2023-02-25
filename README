@@ -2,7 +2,7 @@ TechShell Program
 
 By: Vito Mumphrey and Stone Gorman
 
-ExecuteCommand.c uses the command execvp to run the commands which also checking to make sure execvp ran correctly
+ExecuteCommand.c uses the command execvp to run the commands which also checks to make sure execvp ran correctly
 ParseCommandLineInput.c makes tokens as well as puts them into an array to be used by ExecuteCommand
-IORedirect.c uses the give code to redirect the stdin/stdout to the appropriate location 
+IORedirect.c uses the given code to redirect the stdin/stdout to/from the appropriate location 
 main.c is a driver for subroutines
