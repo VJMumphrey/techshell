@@ -15,22 +15,29 @@ struct CommandInput ParseCommandLineInput(char userInput[], char** args, int* he
 
 	/* loops through the tokens and adds them to the parsedInput */
 	while (token != NULL) {
-		printf("numTokens: %d\n", numTokens);
+
 		if (numTokens == -1) {
 			command.command = token;
-			numTokens += 1;
+			numTokens++;
 			continue;
 		}
 
 		if (args) {
 
+			/* set values for redirection */
 			if (*token == '>' || *token == '<') {
 				command.op = *token;	
 				goto skip;
 			}
+
+			/* if (command.op == args[numTokens-1][0]) { */
+			/* 	command.outfile = token; */	
+			/* } */
+
+			/* set the args values */
 			strcpy(args[numTokens], token);
 
-			skip:
+		skip:
 			if (DEBUG == 1) {
 				printf("%s from parser\n", token);
 			}
@@ -54,21 +61,14 @@ struct CommandInput ParseCommandLineInput(char userInput[], char** args, int* he
 			token[pos] = '\0';
 		}
 
-		numTokens += 1;
+		numTokens++;
 	}
 
 	/* check to reduce memory */
 	args = (char**)realloc(args, (numTokens+1) * sizeof(char*));
 	*heapSize = numTokens+1;
 
-	/* append null to the end of the args list */
-	/* for (int i = 0; i < *heapSize; i++) { */
-	/* 	if (args[i] == 0){ */
-	/* 		args[i] = NULL; */
-	/* 	} */
-	/* } */
-
-	args[numTokens+1] = NULL;
+	args[numTokens] = NULL;
 
 	/* parsedInput should always have a command in the first spot */
 	/* followed by parameters */

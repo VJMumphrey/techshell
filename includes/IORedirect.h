@@ -1,7 +1,6 @@
 #ifndef IO
 #define IO
 
-#include <stdio.h>
-FILE* IORedirect(char operator);
+void IORedirect(struct CommandInput command);
 
 #endif

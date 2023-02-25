@@ -15,7 +15,7 @@ ExecuteCommand.o: ExecuteCommand.c ../lib/cons.h ../includes/IORedirect.h
 ParseCommandLineInput.o: ParseCommandLineInput.c ../lib/cons.h
 	$(CC) $(CFLAGS) -o ../obj/ParseCommandLineInput.o -c ParseCommandLineInput.c
 
-IORedirect.o: IORedirect.c 
+IORedirect.o: IORedirect.c ../lib/cons.h
 	$(CC) $(CFLAGS) -o ../obj/IORedirect.o -c IORedirect.c
 
 clean:

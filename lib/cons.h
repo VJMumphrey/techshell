@@ -4,7 +4,7 @@
 
 
 /* change the value to 1 for debug mode */
-#define DEBUG 1
+#define DEBUG 0
 
 
 /* base number to be used to allocate memory onto the heap */
@@ -23,6 +23,7 @@ struct CommandInput {
 	char* command;
 	char** args;
 	char op;
+	char* outfile;
 
 };
 

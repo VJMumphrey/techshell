@@ -1,24 +1,20 @@
 #include <stdio.h>
 #include <unistd.h>
+#include "../lib/cons.h"
 
-FILE* IORedirect(char operator) {
+void IORedirect(struct CommandInput command) {
 	
 	/* opens files and creates/returns handles so they can be used elsewhere */
 
-	FILE* file;
-	
-	if (operator == '>') {
-		FILE* outfile = fopen("outfile", "w+");
-		/* dup2(fileno(outfile), 0); */
-	
-		file = outfile;
+	if (command.op == '>') {
+		FILE* outfile = fopen(command.outfile, "w");
+		dup2(fileno(outfile), 1);
+		fclose(outfile);
 
-	}else if (operator == '<') {
-		FILE* infile = fopen("inputFile", "r");
-		/* dup2(fileno(infile), 0); */
-
-		file = infile;
+	}else if (command.op == '<') {
+		FILE* infile = fopen(command.outfile, "r");
+		dup2(fileno(infile), 0);
+		fclose(infile);
 	}
 
-	return file;
 }

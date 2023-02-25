@@ -6,3 +6,8 @@ ExecuteCommand.c uses the command execvp to run the commands which also checks t
 ParseCommandLineInput.c makes tokens as well as puts them into an array to be used by ExecuteCommand
 IORedirect.c uses the given code to redirect the stdin/stdout to/from the appropriate location 
 main.c is a driver for subroutines
+
+To build the project, cd into the src directory and run "make"
+To clean the project, cd into the src directory and run "make clean"
+
+for debug change the DEBUG value in lib/cons.h to 1
