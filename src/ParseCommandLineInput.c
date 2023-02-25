@@ -5,29 +5,34 @@
 #include "../lib/cons.h"
 
 
-struct CommandInput ParseCommandLineInput(char userInput[], char** args, int heapSize) {
-	int numTokens = 0;
+struct CommandInput ParseCommandLineInput(char userInput[], char** args, int* heapSize) {
+	int numTokens = -1;
 	struct CommandInput command;
 
 	char* token = strtok(userInput, " ");
+	int pos = strcspn(token, "\n");
+    token[pos] = '\0';
 
 	/* loops through the tokens and adds them to the parsedInput */
 	while (token != NULL) {
+		printf("numTokens: %d\n", numTokens);
+		if (numTokens == -1) {
+			command.command = token;
+			numTokens += 1;
+			continue;
+		}
 
 		if (args) {
-			if (numTokens == 0) {
-				command.command = token;
-			}else {
-				if (*token == '>' || *token == '<') {
-					command.op = *token;	
-					goto skip;
-				}
-				strcpy(args[numTokens], token);
-			}
-		skip:
 
+			if (*token == '>' || *token == '<') {
+				command.op = *token;	
+				goto skip;
+			}
+			strcpy(args[numTokens], token);
+
+			skip:
 			if (DEBUG == 1) {
-				printf("%s ", token);
+				printf("%s from parser\n", token);
 			}
 			
 		}else {
@@ -37,14 +42,33 @@ struct CommandInput ParseCommandLineInput(char userInput[], char** args, int hea
 
 		/* reallocate memory if the amount that is already present is full */
 		if (numTokens == BASE_AMOUNT_OF_INPUT_STORAGE) {
-			char** parsedInput = (char**)realloc(parsedInput, BASE_AMOUNT_OF_INPUT_STORAGE*2); 
-			heapSize += BASE_AMOUNT_OF_INPUT_STORAGE;
+			*heapSize += BASE_AMOUNT_OF_INPUT_STORAGE;
+			args = (char**)realloc(args, *heapSize); 
 		}
 
 		token = strtok(NULL, " ");
-		numTokens += 1;
 
+		/* strip the \n from the token */
+		if (token != NULL) {
+			int pos = strcspn(token, "\n");
+			token[pos] = '\0';
+		}
+
+		numTokens += 1;
 	}
+
+	/* check to reduce memory */
+	args = (char**)realloc(args, (numTokens+1) * sizeof(char*));
+	*heapSize = numTokens+1;
+
+	/* append null to the end of the args list */
+	/* for (int i = 0; i < *heapSize; i++) { */
+	/* 	if (args[i] == 0){ */
+	/* 		args[i] = NULL; */
+	/* 	} */
+	/* } */
+
+	args[numTokens+1] = NULL;
 
 	/* parsedInput should always have a command in the first spot */
 	/* followed by parameters */
@@ -55,3 +79,5 @@ struct CommandInput ParseCommandLineInput(char userInput[], char** args, int hea
 
 	return command;
 }
+
+

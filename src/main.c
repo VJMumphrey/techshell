@@ -14,7 +14,7 @@ int main (void) {
 	char userInput[256];
 	char cwdArray[50];
 	char* exitCase = "exit";
-	
+
 	/* the main loop of the program that runs until users stops */
 	while (1) {
 		
@@ -36,7 +36,7 @@ int main (void) {
 			exit(0);
 		}
 
-		/* used to keep track of reallocations */
+		/* used to keep track of reallocations/size on the heap */
 		int heapSize = BASE_AMOUNT_OF_INPUT_STORAGE;
 
 		/* build an array of strings on the heap */
@@ -47,10 +47,10 @@ int main (void) {
 		}
 
 		/* parse the commandline input */
-		struct CommandInput command = ParseCommandLineInput(userInput, parsedInput, heapSize);
+		struct CommandInput command = ParseCommandLineInput(userInput, parsedInput, &heapSize);
 
 		/* execute the command with the given the args */
-		ExecuteCommand(command);
+		ExecuteCommand(command, &heapSize);
 
 		/* free all of the memory */
 		for (int i = 0; i < heapSize; i++) {

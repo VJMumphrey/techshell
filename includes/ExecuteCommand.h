@@ -1,6 +1,6 @@
 #ifndef EXECUTE
 #define EXECUTE
 
-void ExecuteCommand(struct CommandInput command);
+void ExecuteCommand(struct CommandInput command, int* heapSize);
 
 #endif
