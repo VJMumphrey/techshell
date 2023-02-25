@@ -1,3 +1,15 @@
+//
+//	 Vito Mumphrey & Stone Gorman
+//
+//	 CSC 222 System Programming
+//
+//		 Techshell Project
+//
+//		   	 2-25-23
+//
+
+
+
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>

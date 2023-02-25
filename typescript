@@ -1,0 +1,36 @@
+Script started on 2023-02-25 17:32:29-05:00 [TERM="alacritty" TTY="/dev/pts/0" COLUMNS="174" LINES="46"]
+[1m[7m%[27m[1m[0m                                                                                                                                                                              ]2;veto@fed:~/school/CSC222/hw/techshell/src]1;..techshell/src[0m[27m[24m[J[36msrc[01;34m([34mmain[34m) [31m✗[00m[00m[01;34m[00m: [K[?1h=[?2004h../shell[1m [0m[0m [?1l>[?2004l
+]2;./shell]1;./shell/home/veto/school/CSC222/hw/techshell/src$ ls
+ExecuteCommand.c  main.c  Makefile  ParseCommandLineInput.c  shell  typescript
+/home/veto/school/CSC222/hw/techshell/src$ cd ..
+/home/veto/school/CSC222/hw/techshell$ cd src
+/home/veto/school/CSC222/hw/techshell/src$ ps
+    PID TTY          TIME CMD
+  14976 pts/1    00:00:00 zsh
+  15025 pts/1    00:00:00 shell
+  15027 pts/1    00:00:00 ps
+/home/veto/school/CSC222/hw/techshell/src$ ps > out.txt
+/home/veto/school/CSC222/hw/techshell/src$ cat out	.txt
+    PID TTY          TIME CMD
+  14976 pts/1    00:00:00 zsh
+  15025 pts/1    00:00:00 shell
+  15030 pts/1    00:00:00 ps
+/home/veto/school/CSC222/hw/techshell/src$ where  is ps
+ps: /usr/bin/ps /usr/share/man/man1/ps.1.gz
+/home/veto/school/CSC222/hw/techshell/src$ pwd
+/home/veto/school/CSC222/hw/techshell/src
+/home/veto/school/CSC222/hw/techshell/src$ wc -l main.c
+77 main.c
+/home/veto/school/CSC222/hw/techshell/src$ horseface
+Error in running command
+try using [cmd] [arguments...] [I/O] [file]
+eg: ls -la > out.txt
+/home/veto/school/CSC222/hw/techshell/src$ ps
+    PID TTY          TIME CMD
+  14976 pts/1    00:00:00 zsh
+  15025 pts/1    00:00:00 shell
+  15053 pts/1    00:00:00 ps
+/home/veto/school/CSC222/hw/techshell/src$ exit
+[1m[7m%[27m[1m[0m                                                                                                                                                                              ]2;veto@fed:~/school/CSC222/hw/techshell/src]1;..techshell/src[0m[27m[24m[J[36msrc[01;34m([34mmain[34m) [31m✗[00m[00m[01;34m[00m: [K[?1h=[?2004heexit[?1l>[?2004l
+]2;exit]1;exit
+Script done on 2023-02-25 17:33:43-05:00 [COMMAND_EXIT_CODE="0"]

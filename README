@@ -4,10 +4,13 @@ By: Vito Mumphrey and Stone Gorman
 
 ExecuteCommand.c uses the command execvp to run the commands which also checks to make sure execvp ran correctly
 ParseCommandLineInput.c makes tokens as well as puts them into an array to be used by ExecuteCommand
-IORedirect.c uses the given code to redirect the stdin/stdout to/from the appropriate location 
+redirection is done in the ExecuteCommand function. It uses the given code to redirect the stdin/stdout to/from the appropriate location 
+input redirection does not unfortuneatley work.
 main.c is a driver for subroutines
+
+typescript is a outfile from script
 
 To build the project, cd into the src directory and run "make"
 To clean the project, cd into the src directory and run "make clean"
 
-for debug change the DEBUG value in lib/cons.h to 1
+for debug output change the DEBUG value in lib/cons.h to 1

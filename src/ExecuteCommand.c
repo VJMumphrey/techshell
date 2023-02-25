@@ -59,7 +59,9 @@ void ExecuteCommand(struct CommandInput command, int* heapSize) {
 			int status_code = execvp(command.args[0], command.args);
 
 			if (status_code == -1){
-				printf("Process did not terminate correctly\n");
+				printf("Error in running command\n");
+				printf("try using [cmd] [arguments...] [I/O] [file]\n");
+				printf("eg: ls -la > out.txt\n");
 				exit(0);
 			}
 
